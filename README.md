@@ -7,5 +7,5 @@
 # Fig 4.8.6-2
 ![Fig. 4.8.6-2 (Phase plot)](./PNG/plot_4_8_6_2.png)
 
-# Fig 4.8.6-2
+# Fig 4.8.7
 ![Fig. 4.8.7, Phase plot with nullclines](./PNG/plot_4_8_7.png)
