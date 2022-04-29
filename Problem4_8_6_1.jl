@@ -8,23 +8,23 @@ Plots.gr(lw=2)
 hill(x, k) = x / (x + k)
 hill(x, k, n) = hill(x^n, k^n)
 
-@parameters k_1 k_2 k_3 k_4 k_5 n
-@variables t A(t) B(t)
+@parameters k_1 k_2 k_3 A B
+@variables t X(t) Y(t)
 D = Differential(t)
 
-eqs = [ D(A) ~ k_1 * hill(1, B, n) - (k_3 + k_5)* A,
-        D(B) ~ k_2 + k_5 * A - k_4 * B]
+eqs = [ D(X) ~ k_1*X*A - k_2*X^2,
+        D(Y) ~ k_2*X^2 - k_3*Y]
 @named sys = ODESystem(eqs)
 
-params = Dict(k_1=>20.0, k_2=>5.0, k_3=>5.0, k_4=>5.0, k_5=>2.0, n=>4)
+params = Dict(k_1=>1.0, k_2=>1.0, k_3=>1.0, A=>1.0, B=>1.0)
 
-u0s = (Dict(A=>0.0, B=>0.0), 
-       Dict(A=>0.5, B=>0.6),
-       Dict(A=>0.17, B=>1.1),
-       Dict(A=>0.25, B=>1.9),
-       Dict(A=>1.85, B=>1.70))
+u0s = (Dict(X=>0.0, Y=>0.0),
+       Dict(X=>0.1, Y=>0.3),
+       Dict(X=>0.17, Y=>0.6),
+       Dict(X=>0.25, Y=>1.3),
+       Dict(X=>1.5, Y=>1.70))
 
-tend = 1.5
+tend = 10
 
 sols = map(u0s) do u0
     prob = ODEProblem(sys, u0, tend, params)
@@ -32,12 +32,12 @@ sols = map(u0s) do u0
 end;
 
 
-p3 = plot()
-for sol in sols
-    plot!(p3, sol, linealpha=0.5, legend = nothing)
-end
+# p3 = plot()
+# for sol in sols
+#     plot!(p3, sol, linealpha=0.5, legend = nothing)
+# end
 
-plot!(p3, xlabel="Time", ylabel="Concentration", title="Fig. 4.3A (Time series)")
+# plot!(p3, xlabel="Time", ylabel="Concentration", title="Fig. 4.3A (Time series)")
 
 
 p4 = plot()
@@ -45,4 +45,4 @@ for sol in sols
     plot!(p4, sol, vars=(1, 2), linealpha=0.7, legend = nothing)
 end
 
-plot!(p4, aspect_ratio=:equal, title="Fig. 4.3B (Phase plot)", xlabel="[A]", ylabel="[B]", ylims=(0.0, 2.0), xlims=(0.0, 2.0), size=(600, 600))
+plot!(p4, aspect_ratio=:equal, title="Fig. 4.8.6-1 (Phase plot)", xlabel="[X]", ylabel="[Y]", ylims=(0.0, 2.0), xlims=(0.0, 2.0), size=(600, 600))
