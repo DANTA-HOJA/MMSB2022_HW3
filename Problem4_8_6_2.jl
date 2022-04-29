@@ -45,4 +45,4 @@ for sol in sols
     plot!(p4, sol, vars=(1, 2), linealpha=0.7, legend = nothing)
 end
 
-plot!(p4, aspect_ratio=:equal, title="Fig. 4.8.6-1 (Phase plot)", xlabel="[X]", ylabel="[Y]", ylims=(0.0, 2.0), xlims=(0.0, 2.0), size=(600, 600))
+plot!(p4, aspect_ratio=:equal, title="Fig. 4.8.6-2 (Phase plot)", xlabel="[X]", ylabel="[Y]", ylims=(0.0, 6.0), xlims=(0.0, 6.0), size=(600, 600))
